@@ -32,21 +32,31 @@ $current = basename($_SERVER['PHP_SELF']);
         <nav class="sidebar-nav">
 
             <!-- Dashboard -->
-            <a href="index.php" class="nav-item <?php echo $current === 'index.php' ? 'active' : ''; ?>">
+            <a href="index.php"
+               class="nav-item <?php echo $current === 'index.php' ? 'active' : ''; ?>">
                 <span class="nav-dot"></span>
                 Dashboard
             </a>
 
             <!-- Add Product -->
-            <a href="create.php" class="nav-item <?php echo in_array($current, ['create.php', 'edit.php']) ? 'active' : ''; ?>">
+            <a href="create.php"
+               class="nav-item <?php echo in_array($current, ['create.php', 'edit.php']) ? 'active' : ''; ?>">
                 <span class="nav-dot"></span>
                 Add Product
             </a>
 
             <!-- Add Category -->
-            <a href="add_category.php" class="nav-item <?php echo $current === 'add_category.php' ? 'active' : ''; ?>">
+            <a href="add_category.php"
+               class="nav-item <?php echo $current === 'add_category.php' ? 'active' : ''; ?>">
                 <span class="nav-dot"></span>
                 Add Category
+            </a>
+
+            <!-- Customers -->
+            <a href="customers.php"
+               class="nav-item <?php echo $current === 'customers.php' ? 'active' : ''; ?>">
+                <span class="nav-dot"></span>
+                Customers
             </a>
 
         </nav>
@@ -71,15 +81,12 @@ $current = basename($_SERVER['PHP_SELF']);
                 </h1>
 
                 <?php if (isset($pageSubtitle)): ?>
-
                     <p>
                         <?php echo htmlspecialchars($pageSubtitle); ?>
                     </p>
-
                 <?php endif; ?>
 
             </div>
-
 
             <?php if (isset($topbarAction)): ?>
 
