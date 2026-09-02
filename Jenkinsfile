@@ -9,22 +9,32 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Docker Build') {
             steps {
-                echo 'Building CRUD application...'
+                sh 'docker build -t crud-app:latest .'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Testing CRUD application...'
+                sh 'docker image inspect crud-app:latest > /dev/null'
+                echo 'Docker image test successful!'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                    docker rm -f crud-app-container || true
+                    docker run -d --name crud-app-container -p 80:80 crud-app:latest
+                '''
             }
         }
     }
 
     post {
         success {
-            echo 'CRUD application pipeline completed successfully!'
+            echo 'CRUD application deployed successfully!'
         }
 
         failure {
