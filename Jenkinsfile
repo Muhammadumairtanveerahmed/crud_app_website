@@ -11,23 +11,21 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t crud-app:latest .'
+                bat 'docker build -t crud-app:latest .'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'docker image inspect crud-app:latest > /dev/null'
+                bat 'docker image inspect crud-app:latest'
                 echo 'Docker image test successful!'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh '''
-                    docker rm -f crud-app-container || true
-                    docker run -d --name crud-app-container -p 80:80 crud-app:latest
-                '''
+                bat 'docker rm -f crud-app-container 2>NUL || exit /b 0'
+                bat 'docker run -d --name crud-app-container -p 80:80 crud-app:latest'
             }
         }
     }
