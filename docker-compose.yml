@@ -1,0 +1,26 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    environment:
+      DB_HOST: db
+      DB_USER: crud_user
+      DB_PASS: crud_pass
+      DB_NAME: crud_app
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_pass
+      MYSQL_DATABASE: crud_app
+      MYSQL_USER: crud_user
+      MYSQL_PASSWORD: crud_pass
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database.sql:/docker-entrypoint-initdb.d/database.sql
+volumes:
+  db_data:

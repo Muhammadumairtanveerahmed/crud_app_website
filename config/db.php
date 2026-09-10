@@ -1,10 +1,11 @@
 <?php
 // Database connection settings
-// IMPORTANT: On your EC2 server, update these values to match your MySQL setup.
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');            // XAMPP default username
-define('DB_PASS', '');                // XAMPP default password (empty)
-define('DB_NAME', 'crud_app');
+// Reads from environment variables (set in docker-compose.yml),
+// falls back to local defaults if not set.
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_USER', getenv('DB_USER') ?: 'root');
+define('DB_PASS', getenv('DB_PASS') ?: '');
+define('DB_NAME', getenv('DB_NAME') ?: 'crud_app');
 
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 

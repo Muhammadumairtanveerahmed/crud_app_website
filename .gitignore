@@ -1,0 +1,4 @@
+kubectl
+minikube-linux-amd64
+full_backup.sql
+*.log
