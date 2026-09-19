@@ -12,8 +12,8 @@ spec:
     spec:
       containers:
         - name: crud-app
-          image: crud-app:k8s
-          imagePullPolicy: Never
+          image: umaircontainerreg.azurecr.io/crud-app:v1
+          imagePullPolicy: Always
           env:
             - name: DB_HOST
               value: "db"
@@ -31,7 +31,7 @@ kind: Service
 metadata:
   name: crud-app-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector: { app: crud-app }
   ports:
     - port: 80
